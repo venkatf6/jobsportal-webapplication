@@ -1,0 +1,29 @@
+{% extends "_base.html" %}
+{% block content %}
+  <h1>Welcome, <em>{{ current_user.email }}</em>!</h1>
+  <h3>This is the personal dashboard!!</h3>
+  
+    <div class="container">
+	<div class="row">
+      <div class="col-md-15">
+      <!-- Nav tabs --><div class="card">
+          <ul class="nav nav-tabs" role="tablist">
+               <li role="presentation" class="active"><a href="#jobs" aria-controls="jobs" role="tab" data-toggle="tab">Jobs</a></li>
+           </ul>
+
+                                    <!-- Tab panes -->
+          <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="jobs">List of jobs</div>
+            </div>
+        </div>
+      </div>
+	</div>
+   </div>
+
+
+
+
+
+
+
+{% endblock %}

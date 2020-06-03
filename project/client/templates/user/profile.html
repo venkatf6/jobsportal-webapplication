@@ -1,0 +1,30 @@
+{% extends '_base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+  <header class="content-header">
+    <h1>Profile Builder</h1>
+  </header>
+
+  <br>
+  <form class="form" role="form" method="post" action="">
+
+    {{ form.csrf_token }}
+    {{ form.hidden_tag() }}
+    {{ wtf.form_errors(form, hiddens="only") }}
+    <div class="col-lg-4 col-sm-4">
+
+      {{ wtf.form_field(form.email) }}
+      {{ wtf.form_field(form.phonenumber) }}
+      {{ wtf.form_field(form.zipcode) }}
+      {{ wtf.form_field(form.skillset) }}
+      {{ wtf.form_field(form.notifications) }}
+      <button class="btn btn-success" type="submit">Create Profile</button>
+      
+    </div>
+
+  </form>
+
+
+{% endblock content %}

@@ -1,0 +1,114 @@
+{% extends "_base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+  <h1>Welcome, <em>{{ current_user.email }}</em>!</h1>
+  
+  
+  <div class="body-content">
+  <div class="row">
+
+     <div class="container">
+       <div class="row">
+
+        <div class="col-md-15">
+
+
+
+
+        <div class="card">
+          <ul class="nav nav-tabs" role="tablist">
+               <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile Settings</a></li>
+               <li role="presentation"><a href="#companies" aria-controls="companies" role="tab" data-toggle="tab">Companies</a></li>
+               <li role="presentation"><a href="#sjobs" aria-controls="sjobs" role="tab" data-toggle="tab">Suggested Jobs</a></li>
+           </ul>
+
+
+        
+                                    
+          <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="profile">
+                {% if current_user.is_authenticated %}
+                    
+
+                    <p class="text-left"> Email : {{ profile.email }}</p>
+                    <p class="text-left"> Profile Phone Number : {{ profile.phonenumber }}</p>
+                    <p class="text-left"> Skillset :{{ profile.skillset }}</p>
+                    
+                   
+                {% endif %}
+             </div>
+        
+
+                                    
+              <div role="tabpanel" class="tab-pane" id="companies">
+                {% if current_user.is_authenticated %}
+                     <p class="text-center"> List of Companies</p>
+                     <table class="table table-striped">
+                     <thead>
+                         <tr>
+                             <th>Name</th>
+                             <th>URL</th>
+                             <th>Tagline</th>
+                             <th>Location</th>
+
+                         </tr>
+                     </thead>
+                     <tbody>
+                     {% for comp in profile.jcompanies: %}
+                     <tr>
+                     <td>{{ comp['name'] }}</td>
+                     <td>{{ comp['url'] }}</td>
+                     <td>{{ comp['tagline'] }}</td>
+                     <td>
+                      {% for key in comp['location']: %}
+                         <p> {{ comp['location'][key] }} </p>
+                      {% endfor %}
+                     </td>
+
+                     </tr>
+                     {% endfor %}
+                     </tbody>
+                     </table>
+                {% endif %}
+            </div>
+
+
+            <div role="tabpanel" class="tab-pane" id="sjobs">
+                {% if current_user.is_authenticated %}
+                     <p class="text-center"> List of Jobs</p>
+                     <table class="table table-striped">
+                     <thead>
+                         <tr>
+                            
+                         </tr>
+                     </thead>
+                     <tbody>
+                     {% for job in profile.jsearch: %}
+                     <tr>
+                         <td>
+                            <p> Company Name : {{ job['company']['name'] }} </p> 
+                            <p> Company URL : <a href="{ job['company']['url'] }}"> {{ job['company']['url'] }}</a></p>  
+                            <p> Job Id : {{ job['id'] }} </p>  
+                            <p> Job Title: {{ job['title'] }} </p>  
+                            <p> Job URL:<a href="{{ job['apply_url'] }}">{{ job['apply_url'] }}</a></p>
+                         </td>
+                     </tr>
+                     {% endfor %}
+                     </tbody>
+                     </table>
+                {% endif %}
+            </div>
+        
+         </div>
+
+
+      </div>
+  </div>
+</div>
+
+      </div>
+       </div>
+       </div>
+  
+
+   {% endblock content %}
